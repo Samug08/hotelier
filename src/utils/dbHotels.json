@@ -32,7 +32,7 @@
       "2024-10-08T12:43:24.276311252",
       "2024-10-08T12:49:36.972907113"
     ],
-    "ranking": 3.860353645357511
+    "ranking": 1.261597908853026
   },
   {
     "id": 2,
@@ -59,7 +59,7 @@
     "dates": [
       "2024-10-08T11:58:23.049508341"
     ],
-    "ranking": 3.003562194128832
+    "ranking": 2.765161467824821
   },
   {
     "id": 3,
@@ -79,7 +79,7 @@
     "dates": [
       "2024-10-08T12:04:04.625383119"
     ],
-    "ranking": 2.063090308632586
+    "ranking": 3.371967993524497
   },
   {
     "id": 4,
@@ -227,7 +227,7 @@
       "2024-10-08T12:41:31.241434823",
       "2024-10-08T12:42:08.849787613"
     ],
-    "ranking": 3.6457348938301775
+    "ranking": 4.8829657494784415
   },
   {
     "id": 11,
@@ -255,7 +255,7 @@
     "dates": [
       "2024-10-08T12:19:12.649307112"
     ],
-    "ranking": 3.0664481810770488
+    "ranking": 5.54422126981364
   },
   {
     "id": 12,
@@ -272,15 +272,18 @@
       "Piscina",
       "TV in camera"
     ],
-    "rate": 0,
+    "rate": 3,
     "ratings": {
-      "cleaning": 0,
-      "position": 0,
-      "services": 0,
-      "quality": 0
+      "cleaning": 3,
+      "position": 5,
+      "services": 5,
+      "quality": 4
     },
-    "reviewNumber": 0,
-    "ranking": 0.0
+    "reviewNumber": 1,
+    "dates": [
+      "2024-10-08T17:29:43.387840390"
+    ],
+    "ranking": 2.620008121219201
   },
   {
     "id": 13,
@@ -322,11 +325,13 @@
       "services": 3,
       "quality": 3
     },
-    "reviewNumber": 1,
+    "reviewNumber": 3,
     "dates": [
-      "2024-10-08T12:18:54.701982603"
+      "2024-10-08T12:18:54.701982603",
+      "2024-10-08T17:17:17.125012360",
+      "2024-10-08T17:17:40.649325247"
     ],
-    "ranking": 2.0738602058021938
+    "ranking": 3.236965966015649
   },
   {
     "id": 15,
@@ -483,7 +488,7 @@
     "dates": [
       "2024-10-08T12:16:32.426727444"
     ],
-    "ranking": 1.5390775884133343
+    "ranking": 1.880346264585435
   },
   {
     "id": 22,
@@ -510,7 +515,7 @@
     "dates": [
       "2024-10-08T12:17:34.474457655"
     ],
-    "ranking": 3.0444658566584453
+    "ranking": 4.527956301089313
   },
   {
     "id": 23,
@@ -548,15 +553,19 @@
       "Posto auto",
       "Servizio in camera"
     ],
-    "rate": 0,
+    "rate": 5,
     "ratings": {
-      "cleaning": 0,
-      "position": 0,
-      "services": 0,
-      "quality": 0
+      "cleaning": 5,
+      "position": 5,
+      "services": 5,
+      "quality": 5
     },
-    "reviewNumber": 0,
-    "ranking": 0.0
+    "reviewNumber": 2,
+    "dates": [
+      "2024-10-08T16:48:37.323247663",
+      "2024-10-08T16:49:10.919033398"
+    ],
+    "ranking": 5.675175830038225
   },
   {
     "id": 25,
@@ -2498,15 +2507,18 @@
     "services": [
       "Posto auto"
     ],
-    "rate": 0,
+    "rate": 5,
     "ratings": {
-      "cleaning": 0,
-      "position": 0,
-      "services": 0,
-      "quality": 0
+      "cleaning": 5,
+      "position": 5,
+      "services": 5,
+      "quality": 5
     },
-    "reviewNumber": 0,
-    "ranking": 0.0
+    "reviewNumber": 1,
+    "dates": [
+      "2024-10-08T16:58:45.088014640"
+    ],
+    "ranking": 2.952125154361171
   },
   {
     "id": 112,
@@ -2536,18 +2548,19 @@
     "city": "Roma",
     "phone": "332-1286644",
     "services": [],
-    "rate": 5,
+    "rate": 3,
     "ratings": {
-      "cleaning": 5,
-      "position": 5,
-      "services": 5,
-      "quality": 5
+      "cleaning": 3,
+      "position": 3,
+      "services": 3,
+      "quality": 3
     },
-    "reviewNumber": 1,
+    "reviewNumber": 2,
     "dates": [
-      "2024-10-08T12:57:24.399950457"
+      "2024-10-08T12:57:24.399950457",
+      "2024-10-08T16:59:17.066607736"
     ],
-    "ranking": 3.0364253018652962
+    "ranking": 2.299266128009448
   },
   {
     "id": 114,
@@ -2942,18 +2955,20 @@
       "Piscina",
       "Paga in struttura"
     ],
-    "rate": 5,
+    "rate": 3,
     "ratings": {
-      "cleaning": 5,
-      "position": 5,
-      "services": 5,
-      "quality": 5
+      "cleaning": 3,
+      "position": 3,
+      "services": 3,
+      "quality": 3
     },
-    "reviewNumber": 1,
+    "reviewNumber": 3,
     "dates": [
-      "2024-10-08T12:27:02.639938375"
+      "2024-10-08T12:27:02.639938375",
+      "2024-10-08T17:08:02.850010593",
+      "2024-10-08T17:36:32.866671494"
     ],
-    "ranking": 3.0652350518785716
+    "ranking": 4.547917115188785
   },
   {
     "id": 132,
@@ -2968,15 +2983,22 @@
       "Sauna",
       "TV in camera"
     ],
-    "rate": 0,
+    "rate": 5,
     "ratings": {
-      "cleaning": 0,
-      "position": 0,
-      "services": 0,
-      "quality": 0
+      "cleaning": 5,
+      "position": 5,
+      "services": 5,
+      "quality": 5
     },
-    "reviewNumber": 0,
-    "ranking": 0.0
+    "reviewNumber": 5,
+    "dates": [
+      "2024-10-08T17:34:37.704208555",
+      "2024-10-08T17:34:53.284678588",
+      "2024-10-08T17:35:10.731170418",
+      "2024-10-08T17:35:28.331879694",
+      "2024-10-08T17:36:08.660348777"
+    ],
+    "ranking": 5.5225146007177095
   },
   {
     "id": 133,
@@ -2998,11 +3020,12 @@
       "services": 4,
       "quality": 4
     },
-    "reviewNumber": 1,
+    "reviewNumber": 2,
     "dates": [
-      "2024-10-08T12:18:19.275965877"
+      "2024-10-08T12:18:19.275965877",
+      "2024-10-08T17:07:19.671597587"
     ],
-    "ranking": 2.5235457590607306
+    "ranking": 3.8887742205329277
   },
   {
     "id": 134,
@@ -3041,15 +3064,18 @@
       "Palestra",
       "Servizio in camera"
     ],
-    "rate": 0,
+    "rate": 5,
     "ratings": {
-      "cleaning": 0,
-      "position": 0,
-      "services": 0,
-      "quality": 0
+      "cleaning": 5,
+      "position": 5,
+      "services": 5,
+      "quality": 5
     },
-    "reviewNumber": 0,
-    "ranking": 0.0
+    "reviewNumber": 1,
+    "dates": [
+      "2024-10-08T17:07:40.124391125"
+    ],
+    "ranking": 3.0809775360370653
   },
   {
     "id": 136,
@@ -4085,15 +4111,19 @@
       "Servizio in camera",
       "Cancellazione gratuita"
     ],
-    "rate": 0,
+    "rate": 2,
     "ratings": {
-      "cleaning": 0,
-      "position": 0,
-      "services": 0,
-      "quality": 0
+      "cleaning": 2,
+      "position": 2,
+      "services": 2,
+      "quality": 2
     },
-    "reviewNumber": 0,
-    "ranking": 0.0
+    "reviewNumber": 2,
+    "dates": [
+      "2024-10-08T17:26:23.752003570",
+      "2024-10-08T17:26:41.585907901"
+    ],
+    "ranking": 2.7626919379102
   },
   {
     "id": 182,
@@ -4110,15 +4140,18 @@
       "Cancellazione gratuita",
       "Posto auto"
     ],
-    "rate": 0,
+    "rate": 3,
     "ratings": {
-      "cleaning": 0,
-      "position": 0,
-      "services": 0,
-      "quality": 0
+      "cleaning": 3,
+      "position": 3,
+      "services": 3,
+      "quality": 3
     },
-    "reviewNumber": 0,
-    "ranking": 0.0
+    "reviewNumber": 1,
+    "dates": [
+      "2024-10-08T17:26:07.525808007"
+    ],
+    "ranking": 3.0728705563503667
   },
   {
     "id": 183,

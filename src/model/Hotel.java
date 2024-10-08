@@ -1,15 +1,14 @@
 package model;
 
-import RankingHandler.LocalRankingAlgorithm;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.logging.SimpleFormatter;
+
 
 public class Hotel {
     private int id;
@@ -40,37 +39,28 @@ public class Hotel {
     // getter e setter per tutte le variabili della classe Hotel
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
-
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
-
     public String getDescription() {return description;}
     public void setDescription(String description) {this.description = description;}
-
     public String getCity() {return city;}
     public void setCity(String city) {this.city = city;}
-
     public String getPhone() {return phone;}
     public void setPhone(String phone) {this.phone = phone;}
-
     public String[] getServices() {return services;}
     public void setServices(String[] services) {this.services = services;}
-
     public int getRate() {return rate;}
     public void setRate(int rate) {this.rate = rate;}
-
     public Rating getRatings() {return ratings;}
     public void setRatings(Rating ratings) {this.ratings = ratings;}
-
     public int getReviewNumber() {return reviewNumber;}
     public void setReviewNumber(int reviewNumber) {this.reviewNumber = reviewNumber;}
-
     public ConcurrentLinkedQueue<String> getDates() {return dates;}
     public void setDates(ConcurrentLinkedQueue<String> dates) {this.dates = dates;}
-
     public double getRanking() {return ranking;}
     public void setRanking(double ranking) {this.ranking = ranking;}
 
+    // metodo per ottenere la data di ora
     public String now() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS");
@@ -78,7 +68,8 @@ public class Hotel {
         return formattedNow;
     }
 
-    public void updateDates() {
+    // metodo per aggiungere la data della recensione
+    public void addDates() {
         // aggiorno la data della recensione
         if(getDates() == null) {
             dates = new ConcurrentLinkedQueue<>();
@@ -87,6 +78,7 @@ public class Hotel {
         dates.add(date);
     }
 
+    // metodo per calcolare la media delle date delle recensioni
     public double calculateAverageDate() throws ParseException {
         if(dates == null || dates.isEmpty()) {return 0;}
         long sum = 0;
@@ -101,7 +93,7 @@ public class Hotel {
         return average;
     }
 
-
+    // metodo per aggiornare il rate di un hotel
     public void updateRate(int rate) {
         // se la struttura non ha ancora recensioni, allora aggiorno il rate
         if (this.getReviewNumber() == 0) {
@@ -115,6 +107,7 @@ public class Hotel {
         this.setRate(newScore);
     }
 
+    // metodo per aggiornare i ratings di un hotel
     public void updateRatings(int[] ratings) {
         // Numero totale di recensioni
         int totalReviews = this.getReviewNumber();
@@ -143,15 +136,10 @@ public class Hotel {
         this.ratings.setQuality(newQuality);
     }
 
+    // metodo per aggiornare il numero di recensioni di un hotel
     public void updateNumberReviews() {
         this.setReviewNumber(this.getReviewNumber() + 1);
     }
-
-    //public void updateRanking(ConcurrentHashMap<Integer, Hotel> hotels) {
-        // calcola il ranking
-        //LocalRankingAlgorithm rankingAlgorithm = new LocalRankingAlgorithm(hotels);
-        //rankingAlgorithm.ranking();
-    //}
 
     // toString per la visualizzazione di un hotel
     @Override
@@ -166,6 +154,4 @@ public class Hotel {
                 "\nRatings: " + ratings.toString() +
                 "\nRanking: " + ranking;
     }
-
-
 }

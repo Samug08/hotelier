@@ -301,7 +301,7 @@ public class ClientHandler implements Runnable {
                         ratings[3] = services;
                         ratings[4] = quality;
                         // aggiorno le recensioni dell'hotel e persisto i dati nel file Json
-                        h.updateDates();
+                        h.addDates();
                         h.updateRate(score);
                         h.updateRatings(ratings);
                         h.updateNumberReviews();

@@ -7,7 +7,6 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
-import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,13 +28,10 @@ public class NotifySender implements Runnable {
     // getter e setter
     public void setMs(MulticastSocket ms) {this.ms = ms;}
     public MulticastSocket getMs() {return ms;}
-
     public void setHotels(ConcurrentHashMap<Integer, Hotel> hotels) {this.hotels = hotels;}
     public ConcurrentHashMap<Integer, Hotel> getHotels() {return hotels;}
-
     public void setMulticastAddress(String multicastAddress) {this.multicastAddress = multicastAddress;}
     public String getMulticastAddress() {return multicastAddress;}
-
     public void setMulticastPort(int multicastPort) {this.multicastPort = multicastPort;}
     public int getMulticastPort() {return multicastPort;}
 
@@ -56,16 +52,13 @@ public class NotifySender implements Runnable {
                 List<Hotel> hotelList = hotelsInCity.get(city);
                 // calcola il ranking e restituisco una mappa: {idHotel: _, ranking: _,....}
                 LocalRankingAlgorithm rankingAlgorithm = new LocalRankingAlgorithm(hotels);
-                ConcurrentHashMap<Integer, Double> newRankingInCity = rankingAlgorithm.ranking();
+                rankingAlgorithm.ranking();
                 // Ordina gli hotel della particolare città del ciclo for in base al ranking
                 hotelList.sort(Comparator.comparingDouble(Hotel::getRanking).reversed());
                 // Confronta il ranking attuale con quello precedente per questa città per vedere se
                 // c'è stato un cambiamento in prima posizione o se è nullo.
                 if(!previousRankingInCity.containsKey(city) || previousRankingInCity.get(city) == null ||
                         hotelList.get(0).getId() != previousRankingInCity.get(city).get(0).getId()) {
-                    for(Hotel h: hotelList) {
-                        System.out.println(h.getName() + ": " + h.getRanking());
-                    }
                     // Se il primo hotel con ranking maggiore è cambaito notifica il client
                     String message = "\"" + hotelList.get(0).getName() + "\" adesso è quello con rank maggiore nella città di " + city;
                     sendMulticastMessage(message);
