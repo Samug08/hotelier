@@ -1,0 +1,14 @@
+[
+  {
+    "name": "samu",
+    "password": "123",
+    "badge": "Contributore Super",
+    "reviewNumber": 16
+  },
+  {
+    "name": "rebe",
+    "password": "123",
+    "badge": "Contributore",
+    "reviewNumber": 8
+  }
+]
