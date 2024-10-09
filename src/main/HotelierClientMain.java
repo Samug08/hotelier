@@ -52,103 +52,103 @@ public class HotelierClientMain {
                 in = serverInput;
                 out = serverOutput;
                 // ciclo while infinito per l'interazione con l'utente
-                while (running) {
+                while(running) {
                     System.out.println("Digita il comando (\"-help\" per visualizzare i comandi disponibili)");
                     // switch sul tipo di operazione digitata dall'utente
                     String action = scanner.nextLine().trim();
-                    switch (action) {
-                        case "-register":
-                            if(logged){
-                                System.out.println("Sei già loggato, prima di creare un nuovo account esegui il logout.");
-                            }else {
-                                // mando al server il tipo di operazione da svolgere
-                                out.println("register");
-                                // chiamo il metodo per la registrazione
-                                register();
-                            }
-                            break;
-                        case "-login":
-                            if (logged) {
-                                // se sei già loggato non puoi effettuare di nuovo il login
-                                System.out.println("Sei già loggato");
-                            }else {
-                                // mando al server l'operazione da svolgere
-                                out.println("login");
-                                login();
-                            }
-                            break;
-                        case "-logout":
-                            // controllo se l'utente è loggato
-                            if (logged) {
-                                // mando al server il comando di logout
-                                out.println("logout");
-                                logout();
-                            }else {
-                                System.out.println("Per eseguire il logout devi essere loggato,\n" +
-                                        "esegui prima il login poi riprova.");
-                            }
-                            break;
-                        case "-searchHotel":
-                            // mando al server la richiesta di ricerca hotel
-                            out.println("searchHotel");
-                            searchHotel();
-                            break;
-                        case "-searchAllHotels":
-                            // mando al server la richiesta di ricerca di tutti gli hotel
-                            out.println("searchAllHotels");
-                            searchAllHotels();
-                            break;
-                        case "-insertReview":
-                            if(logged) {
-                                // se sono loggato invio al server il tipo di operazione 
-                                out.println("insertReview");
-                                insertReview();
-                            }else {
-                                System.out.println("Per inserire una recensione devi essere loggato al tuo account.\n" +
-                                        "se non hai un account registrati.");
-                            }
-                            break;
-                        case "-showMyBadge":
-                            if(logged) {
-                                // mando al server la richiesta per visualizzare il badge
-                                out.println("showMyBadge");
-                                showMyBadge();
-                            }else {
-                                System.out.println("Per effettuare questa operazione devi essere loggato.");
-                            }
-                            break;
-                        case "-help":
-                            // visualizza i comandi disponibili
-                            help();
-                            break;
-                        case "-clear":
-                            // Sposta il cursore all'inizio e da l'impressione di una CLI nuova
-                            System.out.print("\033[H\033[2J");
-                            System.out.flush();
-                            break;
-                        case "-exit":
-                            // uscita da hotelier
-                            // quando esco effettua il logout in automatico se sono loggato
-                            if(logged) {
-                                System.out.println("Prima di uscire effettuo il logout...");
-                                out.println("logout");
-                                logout();
-                            }
-                            running = false;
-                            System.out.println("Stai uscendo da hotelier, grazie e alla prossima!");
-                            // Chiusura delle risorse
-                            closeConnection();
-                        default:
-                            // gestione di comandi non riconosciuti
-                            System.out.println("Comando non riconosciuto");
-                            break;
+                    switch(action) {
+                    case "-register":
+                        if(logged) {
+                            System.out.println("Sei già loggato, prima di creare un nuovo account esegui il logout.");
+                        }else {
+                            // mando al server il tipo di operazione da svolgere
+                            out.println("register");
+                            // chiamo il metodo per la registrazione
+                            register();
+                        }
+                        break;
+                    case "-login":
+                        if(logged) {
+                            // se sei già loggato non puoi effettuare di nuovo il login
+                            System.out.println("Sei già loggato");
+                        }else {
+                            // mando al server l'operazione da svolgere
+                            out.println("login");
+                            login();
+                        }
+                        break;
+                    case "-logout":
+                        // controllo se l'utente è loggato
+                        if(logged) {
+                            // mando al server il comando di logout
+                            out.println("logout");
+                            logout();
+                        }else {
+                            System.out.println("Per eseguire il logout devi essere loggato,\n" +
+                                    "esegui prima il login poi riprova.");
+                        }
+                        break;
+                    case "-searchHotel":
+                        // mando al server la richiesta di ricerca hotel
+                        out.println("searchHotel");
+                        searchHotel();
+                        break;
+                    case "-searchAllHotels":
+                        // mando al server la richiesta di ricerca di tutti gli hotel
+                        out.println("searchAllHotels");
+                        searchAllHotels();
+                        break;
+                    case "-insertReview":
+                        if(logged) {
+                            // se sono loggato invio al server il tipo di operazione
+                            out.println("insertReview");
+                            insertReview();
+                        }else {
+                            System.out.println("Per inserire una recensione devi essere loggato al tuo account.\n" +
+                                    "se non hai un account registrati.");
+                        }
+                        break;
+                    case "-showMyBadge":
+                        if(logged) {
+                            // mando al server la richiesta per visualizzare il badge
+                            out.println("showMyBadge");
+                            showMyBadge();
+                        }else {
+                            System.out.println("Per effettuare questa operazione devi essere loggato.");
+                        }
+                        break;
+                    case "-help":
+                        // visualizza i comandi disponibili
+                        help();
+                        break;
+                    case "-clear":
+                        // Sposta il cursore all'inizio e da l'impressione di una CLI nuova
+                        System.out.print("\033[H\033[2J");
+                        System.out.flush();
+                        break;
+                    case "-exit":
+                        // uscita da hotelier
+                        // quando esco effettua il logout in automatico se sono loggato
+                        if(logged) {
+                            System.out.println("Prima di uscire effettuo il logout...");
+                            out.println("logout");
+                            logout();
+                        }
+                        running = false;
+                        System.out.println("Stai uscendo da hotelier, grazie e alla prossima!");
+                        // Chiusura delle risorse
+                        closeConnection();
+                    default:
+                        // gestione di comandi non riconosciuti
+                        System.out.println("Comando non riconosciuto");
+                        break;
                     }
                 }
             }
-        } catch (ConnectException ce) {
+        }catch(ConnectException ce) {
             System.out.println("Nessun server in ascolto sulla porta: " + port);
             ce.printStackTrace();
-        } catch (Exception e) {
+        }catch(Exception e) {
             e.printStackTrace();
         }finally {
             closeConnection();
@@ -157,7 +157,7 @@ public class HotelierClientMain {
 
     // metodo per leggere i file di configurazione
     public static void readInputParameter() throws IOException {
-        try (FileInputStream inputParameter = new FileInputStream("src/utils/client.properties")) {
+        try(FileInputStream inputParameter = new FileInputStream("src/utils/client.properties")) {
             Properties properties = new Properties();
             properties.load(inputParameter);
             port = Integer.parseInt(properties.getProperty("client.port"));
@@ -188,29 +188,28 @@ public class HotelierClientMain {
         String name = requestValidString("Inserisci nome: ",
                 "Il campo nome NON può essere vuoto!");
         out.println(name);
-        if (in.hasNextLine()) {
+        if(in.hasNextLine()) {
             String responseName = in.nextLine();
-            if (responseName.equals("OK")) {
+            if(responseName.equals("OK")) {
                 // richiesta psw per registrazione. Se arrivo qui il nome è 'corretto'
                 String password = requestValidString("Inserisci password: ",
                         "Il campo password NON può essere vuoto!");
                 out.println(password);
-                if (in.hasNextLine()) {
+                if(in.hasNextLine()) {
                     String responsePsw = in.nextLine();
-                    if (responsePsw.equals("OK")) {
+                    if(responsePsw.equals("OK")) {
                         // Codice da eseguire in caso di registrazione avvenuta con successo
                         System.out.println("Registrazione completata con successo.");
-                        return;
-                    } else {
+                    }else {
                         System.out.println(responsePsw);
                     }
-                } else {
+                }else {
                     System.out.println("Errore: risposta non ricevuta per la password. Probabilmente il server è inattivo");
                 }
-            } else {
+            }else {
                 System.out.println(responseName);
             }
-        } else {
+        }else {
             System.out.println("Errore: risposta non ricevuta per il nome. Probabilmente il server è inattivo");
         }
     }
@@ -223,7 +222,7 @@ public class HotelierClientMain {
         // invio del nome al server
         out.println(name);
         // attendo risposta sul nome
-        if (in.hasNextLine()) {
+        if(in.hasNextLine()) {
             String responseName = in.nextLine();
             if(responseName.equals("OK")) {
                 // se va bene: richiesta password
@@ -232,14 +231,14 @@ public class HotelierClientMain {
                 // invio la password al server
                 out.println(password);
                 // attendo risposta sul riscontro della password
-                if (in.hasNextLine()) {
+                if(in.hasNextLine()) {
                     String responsePsw = in.nextLine();
-                    if (responsePsw.equals("OK")) {
+                    if(responsePsw.equals("OK")) {
                         // se psw è corretta effettuo il login
                         logged = true;
                         localName = name;
                         System.out.println("Login effettuato con successo.");
-                    } else {
+                    }else {
                         System.out.println(responsePsw);
                     }
                 }else {
@@ -263,11 +262,11 @@ public class HotelierClientMain {
         // invio al server il nome con cui sono loggato
         out.println(localName);
         // attendo la conferma di logout
-        if (in.hasNextLine() && in.nextLine().equals("OK")) {
+        if(in.hasNextLine() && in.nextLine().equals("OK")) {
             System.out.println("Logout effettuato con successo");
             logged = false;
             InetAddress ia = InetAddress.getByName(udpHost);
-            ms.leaveGroup(ia);
+            ms.leaveGroup(new InetSocketAddress(ia, udpPort), null);
             ms.close();
         }else {
             System.out.println("Errore: impossibile effettuare il logout. Probabilmente il server è inattivo");
@@ -285,7 +284,6 @@ public class HotelierClientMain {
         }else {
             System.out.println("Errore: impossibile richiedere il badge. Probabilmente il server è inattivo");
         }
-
     }
 
     // metodo per la ricerca di un particolare hotel di una particolare città
@@ -298,9 +296,9 @@ public class HotelierClientMain {
         // invio al server il nome dell'hotel
         out.println(nameHotel);
         // attendo risposta sul nome
-        if (in.hasNextLine()) {
+        if(in.hasNextLine()) {
             String responseHotel = in.nextLine();
-            if (responseHotel.equals("OK")) {
+            if(responseHotel.equals("OK")) {
                 // se il nome è corretto continuo con la ricerca
                 // Chiedo la città in cui si trova
                 city = requestValidString("Inserisci la città in cui si trova l'hotel: ",
@@ -308,22 +306,22 @@ public class HotelierClientMain {
                 // invio al server la città in cui si trova l'hotel
                 out.println(city);
                 // attendo risposta sul riscontro della città
-                if (in.hasNextLine()) {
+                if(in.hasNextLine()) {
                     String responseCity = in.nextLine();
-                    if (responseCity.equals("OK")) {
+                    if(responseCity.equals("OK")) {
                         // se tutto è andato bene stampo i dettagli dell'hotel
                         String hotelJson = in.nextLine();
                         Gson gson = new Gson();
                         Hotel hotelInfo = gson.fromJson(hotelJson, Hotel.class);
                         System.out.println(hotelInfo);
-                    } else {
+                    }else {
                         // altrimenti stampo il messaggio di errore del server
                         System.out.println(responseCity);
                     }
-                } else {
+                }else {
                     System.out.println("Errore: impossibile effettuare la ricerca. Probabilmente il server è inattivo");
                 }
-            } else {
+            }else {
                 // altrimenti stampo il messaggio di errore del server
                 System.out.println(responseHotel);
             }
@@ -341,7 +339,7 @@ public class HotelierClientMain {
         // invio la città al server
         out.println(city);
         // attendo la risposta
-        if (in.hasNextLine()){
+        if(in.hasNextLine()){
             String response = in.nextLine();
             if(response.contentEquals("OK")) {
                 // se tutto è andato bene stampo i dettagli degli hotel di quella città
@@ -421,31 +419,31 @@ public class HotelierClientMain {
     // metodo per ottenere input di tipo stringa validi dall'utente
     private static String requestValidString(String prompt, String message) {
         String input;
-        do {
+        do{
             System.out.println(prompt);
             input = scanner.nextLine().trim();
             if ((!input.isEmpty())) {
                 break;
             }
             System.out.println(message);
-        } while (true);
+        }while(true);
         return input;
     }
 
     // metodo per ottenere input di tipo intero validi dall'utente e compresi tra 0 e 5
     private static int requestValidInt(String prompt, String message) {
         int input;
-        while (true) {
+        while(true) {
             System.out.println(prompt);
-            try {
+            try{
                 input = Integer.parseInt(scanner.nextLine().trim()); // converte la stringa in int
                 // verifica se l'input è compreso tra 0 e 5
-                if (input >= 0 && input <= 5) {
+                if(input >= 0 && input <= 5) {
                     break; // esce dal ciclo se il numero è nell'intervallo corretto
-                } else {
+                }else {
                     System.out.println("Iserisci un numero tra 0 e 5.");
                 }
-            } catch (NumberFormatException e) {
+            }catch(NumberFormatException e) {
                 // gestisce l'input non valido
                 System.out.println(message);
             }
@@ -456,14 +454,14 @@ public class HotelierClientMain {
 
     // metodo per la chiusura delle risorse
     private static void closeConnection() {
-        try {
+        try{
             if(socket != null && !socket.isClosed()) socket.close();
             if(in != null) in.close();
             if(scanner != null) scanner.close();
             if(out != null) out.close();
             if(rankingReceiver != null) rankingReceiver.shutdown();
             System.exit(0);
-        } catch(IOException e) {
+        }catch(IOException e) {
             System.err.println("Errore durante la chiusura del socket o degli stream: " + e.getMessage());
         }
     }

@@ -3,12 +3,24 @@
     "name": "samu",
     "password": "123",
     "badge": "Contributore Super",
-    "reviewNumber": 35
+    "reviewNumber": 40
   },
   {
     "name": "rebe",
     "password": "123",
-    "badge": "Contributore",
-    "reviewNumber": 8
+    "badge": "Contributore Esperto",
+    "reviewNumber": 10
+  },
+  {
+    "name": "cri",
+    "password": "123",
+    "badge": "Recensore",
+    "reviewNumber": 0
+  },
+  {
+    "name": "matte",
+    "password": "123",
+    "badge": "Recensore",
+    "reviewNumber": 0
   }
 ]

@@ -60,7 +60,7 @@ public class NotifySender implements Runnable {
                 if(!previousRankingInCity.containsKey(city) || previousRankingInCity.get(city) == null ||
                         hotelList.get(0).getId() != previousRankingInCity.get(city).get(0).getId()) {
                     // Se il primo hotel con ranking maggiore è cambaito notifica il client
-                    String message = "\"" + hotelList.get(0).getName() + "\" adesso è quello con rank maggiore nella città di " + city;
+                    String message = "\"" + hotelList.get(0).getName() + "\" è l'hotel con rank maggiore nella città di " + city;
                     sendMulticastMessage(message);
                 }
                 // Aggiorna il ranking per la città in cui siamo (ciclo for)

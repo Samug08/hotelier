@@ -36,8 +36,8 @@ public class HotelierServerMain {
     public static ExecutorService pool;
     // thread per il calcolo periodico del ranking
     public static final ScheduledExecutorService rankingThread = Executors.newSingleThreadScheduledExecutor();
-    // variabile per logica locale del server
-    private static volatile boolean running = true; // variabile per il controllo del ciclo
+    // variabile per il controllo del ciclo
+    private static volatile boolean running = true;
 
     public static void main(String[] args) throws IOException {
         // leggo file di configurazione per parametri di input
@@ -52,7 +52,6 @@ public class HotelierServerMain {
         // dal database degli hotel se non è la prima attivazione
         if(!dbHotels.exists()) {
             initializationHotel(filesHotelsJson);
-
         }else {
             initializationHotel(dbHotels);
         }
@@ -73,7 +72,7 @@ public class HotelierServerMain {
         // creazione socket
         ServerSocket server = new ServerSocket(serverPort);
         System.out.println("Server in ascolto sulla porta " + serverPort + "...");
-        while (running) {
+        while(running) {
             Socket connection = null;
             try{
                 connection = server.accept();
@@ -83,6 +82,7 @@ public class HotelierServerMain {
             }
             pool.execute(new ClientHandler(connection, users, dbUsers, loggedUsers, hotels, dbHotels));
         }
+        server.close();
     }
 
     // metodo per leggere i file di configurazione
@@ -114,9 +114,9 @@ public class HotelierServerMain {
             }
             // Scrive gli hotel nel file dbHotels in formato JSON leggibile
             Gson prettyGson = new GsonBuilder().setPrettyPrinting().create(); // Configurazione per scrittura formattata
-            try (FileWriter writer = new FileWriter(dbHotels)) {
+            try(FileWriter writer = new FileWriter(dbHotels)) {
                 prettyGson.toJson(temporaryHotels, writer); // Serializza la struttura hotels in formato leggibile
-            } catch (IOException e) {
+            }catch(IOException e) {
                 e.printStackTrace();
                 System.err.println("Errore durante la scrittura nel file di backup dbHotels");
                 System.exit(1);
@@ -145,7 +145,8 @@ public class HotelierServerMain {
 
     // Metodo per terminare il server in modo controllato
     public static void stopServer() {
-        running = false; // Ferma il ciclo principale
+        // Ferma il ciclo principale
+        running = false;
         // stoppo il thread che esegue il calcolo del ranking
         rankingThread.shutdown();
         try {

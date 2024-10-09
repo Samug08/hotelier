@@ -169,8 +169,10 @@ public class ClientHandler implements Runnable {
             // controllo se la password corrisponde con quella dell'utente
             if(utente.getPassword().contentEquals(password)) {
                 // se corrisponde aggiungo l'utente ai loggati e notifico l'avvenuta registrazione al client
-                loggedUsers.put(name, users.get(name));
-                out.println("OK");
+                synchronized(loggedUsers) {
+                    loggedUsers.put(name, users.get(name));
+                    out.println("OK");
+                }
             }else{
                 // altrimenti notifico al client l'insuccesso dell'operazione
                 out.println("Password errata, ritenta il login");
@@ -184,11 +186,13 @@ public class ClientHandler implements Runnable {
     // metodo per effettuare il logout dall'account hotelier
     public void logout() {
         String name = in.nextLine();
-        if(loggedUsers.containsKey(name)) {
-            out.println("OK");
-            loggedUsers.remove(name);
-        }else {
-            out.println("Utente non loggato, impossibile effettuare il logout");
+        synchronized(loggedUsers) {
+            if (loggedUsers.containsKey(name)) {
+                out.println("OK");
+                loggedUsers.remove(name);
+            } else {
+                out.println("Utente non loggato, impossibile effettuare il logout");
+            }
         }
     }
 
@@ -257,6 +261,7 @@ public class ClientHandler implements Runnable {
 
     }
 
+    // metodo per inserire una recensione
     public void insertReview() {
         // attendo la stringa nameHotel
         String nameHotel = in.nextLine();
@@ -284,15 +289,7 @@ public class ClientHandler implements Runnable {
                         User user = loggedUsers.get(userName);
                         user.updateReviewNumber();
                         // persistenza degli utenti nel database
-                        synchronized(dbUsers) {
-                            try (FileWriter fw = new FileWriter(dbUsers)) {
-                                Collection<User> objectsUser = users.values();
-                                String jsonObject = new GsonBuilder().setPrettyPrinting().create().toJson(objectsUser);
-                                fw.write(jsonObject);
-                            } catch (IOException e) {
-                                System.err.println("Errore nel salvataggio degli utenti: " + e.getMessage());
-                            }
-                        }
+                        persistUsers();
                         // creo l'array dei ratings
                         int[] ratings = new int[5];
                         ratings[0] = score;
@@ -300,23 +297,15 @@ public class ClientHandler implements Runnable {
                         ratings[2] = position;
                         ratings[3] = services;
                         ratings[4] = quality;
-                        // aggiorno le recensioni dell'hotel e persisto i dati nel file Json
-                        h.addDates();
-                        h.updateRate(score);
-                        h.updateRatings(ratings);
-                        h.updateNumberReviews();
-                        // persisto i dati degli hotel sul file Json
-                        synchronized(dbHotels) {
-                            try (FileWriter fw = new FileWriter(dbHotels)) {
-                                ArrayList<Hotel> temporaryHotels = new ArrayList<Hotel>();
-                                for (Hotel hotel : hotels.values()) {
-                                    temporaryHotels.add(hotel);
-                                }
-                                String jsonObject = new GsonBuilder().setPrettyPrinting().create().toJson(temporaryHotels);
-                                fw.write(jsonObject);
-                            } catch (IOException e) {
-                                System.err.println("Errore nel salvataggio degli hotel: " + e.getMessage());
-                            }
+                        synchronized(h) {
+                            // aggiorno le recensioni dell'hotel e persisto i dati nel file Json
+                            // in maniera sincrona per evitare problemi di concorrenza
+                            h.addDates();
+                            h.updateRate(score);
+                            h.updateRatings(ratings);
+                            h.updateNumberReviews();
+                            // persisto i dati degli hotel sul file Json
+                            persistHotels();
                         }
                         // notifico al client l'avvenuta recensione
                         out.println("Recensione aggiunta con successo all'hotel " + nameHotel);
@@ -332,6 +321,31 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // metodo per persistere i dati degli hotel sul file Json
+    private synchronized void persistHotels() {
+        synchronized (dbHotels) {
+            try (FileWriter fw = new FileWriter(dbHotels)) {
+                ArrayList<Hotel> temporaryHotels = new ArrayList<>(hotels.values());
+                String jsonObject = new GsonBuilder().setPrettyPrinting().create().toJson(temporaryHotels);
+                fw.write(jsonObject);
+            } catch (IOException e) {
+                System.err.println("Errore nel salvataggio degli hotel: " + e.getMessage());
+            }
+        }
+    }
+
+    // metodo per persistere i dati degli utenti sul file Json
+    private synchronized void persistUsers() {
+        synchronized (dbUsers) {
+            try (FileWriter fw = new FileWriter(dbUsers)) {
+                Collection<User> objectsUser = users.values();
+                String jsonObject = new GsonBuilder().setPrettyPrinting().create().toJson(objectsUser);
+                fw.write(jsonObject);
+            } catch (IOException e) {
+                System.err.println("Errore nel salvataggio degli utenti: " + e.getMessage());
+            }
+        }
+    }
 
     // Metodo per chiudere la connessione e liberare le risorse
     private void closeConnection() {
