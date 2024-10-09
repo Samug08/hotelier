@@ -87,7 +87,7 @@ public class HotelierServerMain {
 
     // metodo per leggere i file di configurazione
     public static void readInputParameter() throws IOException {
-        try(FileInputStream inputParameter = new FileInputStream("src/utils/server.properties")) {
+        try(FileInputStream inputParameter = new FileInputStream("/home/samu08/unipi/laboratorio3/hotelier/src/utils/server.properties")) {
             Properties properties = new Properties();
             properties.load(inputParameter);
             serverPort = Integer.parseInt(properties.getProperty("port"));
