@@ -52,6 +52,7 @@ public class HotelierServerMain {
         // dal database degli hotel se non è la prima attivazione
         if(!dbHotels.exists()) {
             initializationHotel(filesHotelsJson);
+            saveHotelsToFile();
         }else {
             initializationHotel(dbHotels);
         }
@@ -110,20 +111,29 @@ public class HotelierServerMain {
         try(FileReader reader = new FileReader(file)) {
             Hotel[] temporaryHotels = gson.fromJson(reader, Hotel[].class);
             for(Hotel h: temporaryHotels) {
+                if(!dbHotels.exists()) {
+                    h.setReviewNumber(0);
+                    h.setRanking(0.0);
+                    h.setDates(new ConcurrentLinkedQueue<String>());
+                }
                 hotels.put(h.getId(), h);
-            }
-            // Scrive gli hotel nel file dbHotels in formato JSON leggibile
-            Gson prettyGson = new GsonBuilder().setPrettyPrinting().create(); // Configurazione per scrittura formattata
-            try(FileWriter writer = new FileWriter(dbHotels)) {
-                prettyGson.toJson(temporaryHotels, writer); // Serializza la struttura hotels in formato leggibile
-            }catch(IOException e) {
-                e.printStackTrace();
-                System.err.println("Errore durante la scrittura nel file di backup dbHotels");
-                System.exit(1);
             }
         }catch(IOException e) {
             e.printStackTrace();
             System.err.println("File not found");
+            System.exit(1);
+        }
+    }
+
+    // metodo per salvare su dbHotels gli hotels
+    public static void saveHotelsToFile() {
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        ArrayList<Hotel> temporaryHotels = new ArrayList<>(hotels.values());
+        try(FileWriter writer = new FileWriter(dbHotels)) {
+            prettyGson.toJson(temporaryHotels, writer); // Serializza la struttura hotels in formato leggibile
+        }catch(IOException e) {
+            e.printStackTrace();
+            System.err.println("Errore durante la scrittura nel file di backup dbHotels");
             System.exit(1);
         }
     }

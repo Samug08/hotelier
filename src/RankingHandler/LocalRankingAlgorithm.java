@@ -11,11 +11,12 @@ public class LocalRankingAlgorithm {
     // costante per decadimento temporale
     private double lambda = 0.1;
     // // Peso per la qualità delle recensioni
-    private double qualityWeight = 1.0;
-    // Peso per la quantità delle recensioni
-    private double quantityWeight = 0.5;
+    private double qualityWeight = 0.5;
     // Peso per l'attualità delle recensioni
-    private double recencyWeight = 0.5;
+    private double recencyWeight = 0.4;
+    // Peso per la quantità delle recensioni
+    private double quantityWeight = 0.3;
+
 
     public LocalRankingAlgorithm(ConcurrentHashMap<Integer, Hotel> hotels) {
         setHotels(hotels);
@@ -46,13 +47,13 @@ public class LocalRankingAlgorithm {
         // Numero di recensioni dell'hotel
         int reviewNumber = hotel.getReviewNumber();
         // Influenza dell'attualità delle recensioni
-        double reviewTimeScore = calculateReviewTimeScore(hotel);
+        double reviewTimeScore = calculateReviewTimeScore(hotel) * recencyWeight;
         // Calcola il punteggio della qualità delle recensioni
         double qualityScore = rateScore * qualityWeight;
         // Calcola il punteggio della quantità delle recensioni
         double quantityScore = Math.log(reviewNumber + 1) * quantityWeight;
         // Combina i vari punteggi ponderati per ottenere il punteggio finale
-        double totalScore = (qualityScore + quantityScore) * reviewTimeScore * recencyWeight;
+        double totalScore = qualityScore + quantityScore + reviewTimeScore;
         // Assicurati che il punteggio non sia negativo
         return totalScore;
     }

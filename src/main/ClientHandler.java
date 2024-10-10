@@ -1,6 +1,5 @@
 package main;
 
-import RankingHandler.LocalRankingAlgorithm;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Hotel;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
+
 
 public class ClientHandler implements Runnable {
 
@@ -297,16 +296,14 @@ public class ClientHandler implements Runnable {
                         ratings[2] = position;
                         ratings[3] = services;
                         ratings[4] = quality;
-                        synchronized(h) {
-                            // aggiorno le recensioni dell'hotel e persisto i dati nel file Json
-                            // in maniera sincrona per evitare problemi di concorrenza
-                            h.addDates();
-                            h.updateRate(score);
-                            h.updateRatings(ratings);
-                            h.updateNumberReviews();
-                            // persisto i dati degli hotel sul file Json
-                            persistHotels();
-                        }
+                        // aggiorno le recensioni dell'hotel e persisto i dati nel file Json
+                        // in maniera sincrona per evitare problemi di concorrenza
+                        h.addDates();
+                        h.updateRate(score);
+                        h.updateRatings(ratings);
+                        h.updateNumberReviews();
+                        // persisto i dati degli hotel sul file Json
+                        persistHotels();
                         // notifico al client l'avvenuta recensione
                         out.println("Recensione aggiunta con successo all'hotel " + nameHotel);
                     }
