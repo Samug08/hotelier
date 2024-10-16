@@ -29,8 +29,11 @@ public class NotifyReceiver implements Runnable {
                 ms.receive(receivedPacket);
                 // Estraiamo il messaggio dal pacchetto
                 String receivedMessage = new String(receivedPacket.getData(), 0, receivedPacket.getLength());
-                // Stampiamo il messaggio ricevuto
-                System.out.println(receivedMessage);
+                // Sincornizzo system.out per non sovrapporre l'output
+                synchronized (System.out) {
+                    // Stampiamo il messaggio ricevuto
+                    System.out.println(receivedMessage);
+                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
