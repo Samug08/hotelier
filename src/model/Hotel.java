@@ -112,27 +112,27 @@ public class Hotel {
         // Numero totale di recensioni
         int totalReviews = this.getReviewNumber();
         if(totalReviews == 0) {
-            this.ratings.setCleaning(ratings[0]);
-            this.ratings.setPosition(ratings[1]);
-            this.ratings.setServices(ratings[2]);
-            this.ratings.setQuality(ratings[3]);
+            this.ratings.setCleaning(ratings[1]);
+            this.ratings.setPosition(ratings[2]);
+            this.ratings.setServices(ratings[3]);
+            this.ratings.setQuality(ratings[4]);
             return;
         }
         // update cleaning
         int oldCleaning = this.ratings.getCleaning();
-        int newCleaning = Math.round(((oldCleaning * totalReviews) + ratings[0]) / (totalReviews + 1));
+        int newCleaning = Math.round(((oldCleaning * totalReviews) + ratings[1]) / (totalReviews + 1));
         this.ratings.setCleaning(newCleaning);
         // update position
         int oldPosition = this.ratings.getPosition();
-        int newPosition = Math.round(((oldPosition * totalReviews) + ratings[1]) / (totalReviews + 1));
+        int newPosition = Math.round(((oldPosition * totalReviews) + ratings[2]) / (totalReviews + 1));
         this.ratings.setPosition(newPosition);
         // update services
         int oldServices = this.ratings.getServices();
-        int newServices = Math.round(((oldServices * totalReviews) + ratings[2]) / (totalReviews + 1));
+        int newServices = Math.round(((oldServices * totalReviews) + ratings[3]) / (totalReviews + 1));
         this.ratings.setServices(newServices);
         // update quality
         int oldQuality = this.ratings.getQuality();
-        int newQuality = Math.round(((oldQuality * totalReviews) + ratings[3]) / (totalReviews + 1));
+        int newQuality = Math.round(((oldQuality * totalReviews) + ratings[4]) / (totalReviews + 1));
         this.ratings.setQuality(newQuality);
     }
 
