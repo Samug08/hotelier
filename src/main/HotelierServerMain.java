@@ -114,7 +114,6 @@ public class HotelierServerMain {
                 if(!dbHotels.exists()) {
                     h.setReviewNumber(0);
                     h.setRanking(0.0);
-                    h.setDates(new ConcurrentLinkedQueue<String>());
                 }
                 hotels.put(h.getId(), h);
             }

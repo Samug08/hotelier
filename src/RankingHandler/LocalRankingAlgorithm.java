@@ -28,11 +28,13 @@ public class LocalRankingAlgorithm {
 
     // metodo per il calcolo del ranking degli hotel
     public void ranking() {
+        // Aggiorna il tempo corrente ogni volta che si calcola il ranking
+        long now = System.currentTimeMillis();
         // Calcola il punteggio per ogni hotel
         for (Hotel hotel : hotels.values()) {
             double score;
             try {
-                score = calculateScore(hotel);
+                score = calculateScore(hotel, now);
                 hotel.setRanking(score);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -41,13 +43,13 @@ public class LocalRankingAlgorithm {
     }
 
     // Metodo per calcolare il punteggio totale di un hotel
-    private double calculateScore(Hotel hotel) throws ParseException {
+    private double calculateScore(Hotel hotel,long now) throws ParseException {
         // Score del rate dell'hotel (punteggio medio)
         double rateScore = hotel.getRate();
         // Numero di recensioni dell'hotel
         int reviewNumber = hotel.getReviewNumber();
         // Influenza dell'attualità delle recensioni
-        double reviewTimeScore = calculateReviewTimeScore(hotel) * recencyWeight;
+        double reviewTimeScore = calculateReviewTimeScore(hotel, now) * recencyWeight;
         // Calcola il punteggio della qualità delle recensioni
         double qualityScore = rateScore * qualityWeight;
         // Calcola il punteggio della quantità delle recensioni
@@ -59,13 +61,12 @@ public class LocalRankingAlgorithm {
     }
 
     // Metodo per calcolare l'attualità delle recensioni
-    private double calculateReviewTimeScore(Hotel hotel) throws ParseException {
+    private double calculateReviewTimeScore(Hotel hotel, long now) throws ParseException {
         // Se l'hotel non ha recensioni, il punteggio di attualità è 0
         if (hotel.getDates() == null || hotel.getDates().isEmpty()) {
             return 0;
         }
-        // Ottieni il tempo corrente
-        long now = System.currentTimeMillis();
+
         // Calcolo la media delle date in millisecondi
         double averageDateScore = hotel.calculateAverageDate();
         // Calcola il tempo trascorso rispetto ad ora
