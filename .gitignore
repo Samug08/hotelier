@@ -5,8 +5,10 @@ out/
 ### ignora database###
 src/utils/dbHotels.json
 src/utils/dbUsers.json
+src/utils
 ### Eclipse ###
 .apt_generated
+.idea
 .classpath
 .factorypath
 .project
